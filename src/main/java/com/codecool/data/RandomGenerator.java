@@ -7,6 +7,10 @@ public class RandomGenerator {
 
     public int generateRandomNumber(int max) {
         random = new Random();
-        return random.nextInt(max);
+        int valid = 0;
+        while (valid == 0) {
+            valid = random.nextInt(max);
+        }
+        return valid;
     }
 }
