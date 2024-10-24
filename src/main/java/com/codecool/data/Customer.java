@@ -3,7 +3,14 @@ package com.codecool.data;
 public class Customer {
     private int id;
     private final String name;
-    private int drunkness = 0;
+    private int drunkenness = 0;
+    private String[] states = {
+            "Please give me something to drink Sir!",
+            "It will be hmmm... your favorite!",
+            "Toss me a drink Bud!",
+            "Another One!",
+            "GimEE sth...just a little bbit SURE!"
+    };
 
     public Customer(String name, int id) {
         this.name = name;
@@ -12,5 +19,20 @@ public class Customer {
 
     public String getName() {
         return name;
+    }
+    public void setDrunkenness(int drunkenness) {
+        if (drunkenness < 100 && drunkenness >= 0) {
+            this.drunkenness = drunkenness;
+        }
+    }
+
+    public String getStates() {
+        return switch (drunkenness / 5) {
+            case 0 -> states[0];
+            case 1 -> states[1];
+            case 2 -> states[2];
+            case 3 -> states[3];
+            default -> states[4];
+        };
     }
 }
