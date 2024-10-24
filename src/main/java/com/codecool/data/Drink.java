@@ -1,6 +1,6 @@
 package com.codecool.data;
 
-public class Drink {
+public abstract class Drink {
     private static int counter = 0;
 
     private final int id;
@@ -9,11 +9,11 @@ public class Drink {
     private final int alcPercentage;
     private int amountLeft;
 
-    public Drink(int amountLeft, int alcPercentage, int price, String name) {
-        this.amountLeft = amountLeft;
+    public Drink(String name, int price, int alcPercentage, int amountLeft) {
         this.alcPercentage = alcPercentage;
         this.price = price;
         this.name = name;
+        this.amountLeft = amountLeft;
         this.id = ++counter;
     }
 }
