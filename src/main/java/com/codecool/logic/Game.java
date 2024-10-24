@@ -17,13 +17,17 @@ public class Game {
 
 
     public void runGame() {
-        display.print("Welcome to our game! \nYou are a bartender serving slightly alcoholics.");
-        display.print("You have " + pub.getCustomerList().size() + " customers waiting for you.");
+        display.print("\n" +
+                "Think you’ve got what it takes to run a pub? \uD83E\uDD14 \nYour challenge is to manage drinks \uD83C\uDF7A " +
+                "and customers, keeping everyone happy without anyone passing out \uD83D\uDE35 or causing trouble \uD83D\uDE2C.\n" +
+                "Serve just the right drinks to make a profit \uD83D\uDCB8 , and win by sending everyone home happy. \nRun out of booze, make a " +
+                "customer mad, or let someone pass out, and you’re out!\n" +
+                "⚠\uFE0F Remember your drink amount, you will only see it once!⚠\uFE0F ");
+        display.print("You have " + pub.getCustomerList().size() + " customer(s) waiting for you.");
         display.showLineBreak();
         display.showAllDrinks(pub.getDrinkList());
 
         do {
-            //customer asks for a drink
             ArrayList<Customer> customers = pub.getCustomerList();
             RandomGenerator randomGenerator = new RandomGenerator();
             for (int i = 0; i < customers.size(); i++) {
@@ -34,9 +38,9 @@ public class Game {
                     boolean barHasDrink = false;
 
                     while (!barHasDrink && customers.get(i).isAvailable()) {
-                        display.print("The options are: ");
+                        display.print("\tThe options are: ");
                         display.showValidDrinks(pub.getDrinkList());
-                        drinkSelected = input.getValidDrink(pub.getDrinkList().size());
+                        drinkSelected = input.getValidDrink(pub.getDrinkList().size(), customers.get(i).getName());
                         if (pub.getDrinkList().contains(pub.getDrinkList().get(drinkSelected))) {
                             customers.get(i).setDrunkenness(pub.getDrinkList().get(drinkSelected).getAlcPercentage());
                             display.print(String.valueOf(customers.get(i).getDrunkenness()));
@@ -61,15 +65,14 @@ public class Game {
 
                     } else {
                         display.print("You failed to do your task and promised a drink to someone when there is no drink left. You lost");
+                        display.print("Today's profit : " + pub.getProfit());
                         isGameOver = true;
                         System.exit(0);
-                        //getprofit
                     }
-
-                    //incerment
-
-                    display.print("Profit earned from this drink: " + pub.getDrinkList().get(drinkSelected).getPrice());
+                    display.print("Added to bank: " + pub.getDrinkList().get(drinkSelected).getPrice() + " Ft");
                     //display all profit
+                    pub.addToProfit(pub.getDrinkList().get(drinkSelected).getPrice());
+
                 } else {
                     int numberOfCustomers = customers.size();
                     int counter = 0;
@@ -80,13 +83,12 @@ public class Game {
                     }
                     if (counter == numberOfCustomers) {
                         display.print("Great day! Everyone went home");
+                        display.print("Today's profit : " + pub.getProfit());
                         isGameOver = true;
                         System.exit(0);
                     }
                 }
             }
-            // bartender gives drink or not
-            //display profit
         } while (!isGameOver);
     }
 
@@ -98,7 +100,7 @@ public class Game {
         ArrayList<Customer> customers = new ArrayList<>();
 
         for (int i = 0; i < randomNumber; i++) {
-            Customer customer = new Customer(names[i], i);
+            Customer customer = new Customer(names[randomNumber], i);
             customers.add(customer);
         }
         return customers;

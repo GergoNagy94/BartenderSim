@@ -10,8 +10,7 @@ public class Customer {
             "It will be hmmm... your favorite!",
             "Toss me a drink Bud!",
             "Another One!",
-            "GimEE sth...just a little bbit SURE!"
-    };
+            "GimEE sth...just a little bbit SURE!"};
 
     public Customer(String name, int id) {
         this.name = name;

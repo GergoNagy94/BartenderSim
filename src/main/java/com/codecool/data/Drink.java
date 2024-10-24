@@ -41,9 +41,9 @@ public class Drink {
 
     @Override
     public String toString() {
-        return "Name: " + name +
-                ", Amount left: " + amountLeft +
-                ", Alcohol Percentage: " + alcPercentage + "%" +
-                ", Price: " + price;
+        return name.toUpperCase() + " " +
+                 amountLeft + "pcs" + " " +
+                 alcPercentage + "%" + " " +
+                 price + " HUF";
     }
 }

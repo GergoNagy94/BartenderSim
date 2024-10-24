@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Input {
 
-    private String getDrinkFromUser() {
+    private String getDrinkFromUser(String name) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select a drink: ");
+        System.out.print("Select a drink for " + name + ": ");
         return scanner.nextLine();
     }
 
@@ -14,12 +14,12 @@ public class Input {
         return userInput >= 1 && userInput <= maxValue;
     }
 
-    public int getValidDrink(int maxValue) {
+    public int getValidDrink(int maxValue, String name) {
         boolean isValid = false;
         String userInput = "";
         while (!isValid) {
             try {
-                userInput = getDrinkFromUser();
+                userInput = getDrinkFromUser(name);
                 if (isUserInputValid(maxValue, Integer.parseInt(userInput))) {
                     isValid = true;
                 } else {

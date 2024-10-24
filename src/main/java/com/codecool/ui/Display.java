@@ -17,11 +17,11 @@ public class Display {
 
     public void showValidDrinks(ArrayList<Drink> drinks){
         for (int i = 0; i < drinks.size(); i++) {
-            print( i + 1 + ". - " + drinks.get(i).getName() + " - " + drinks.get(i).getPrice());
+            print( "\t\t" + (i + 1) + ". " + drinks.get(i).getName().toUpperCase() + " - " + drinks.get(i).getPrice() + "Ft");
         }
     }
 
     public void showLineBreak() {
-        print("--------------------------------------------------------------");
+        print("-------------------------------------------------------------- \n");
     }
 }

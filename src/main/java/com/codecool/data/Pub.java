@@ -32,4 +32,8 @@ public class Pub {
     public void addDrink(Drink drink) {
         drinkList.add(drink);
     }
+
+    public void addToProfit(double moneyToAdd) {
+        profit += moneyToAdd;
+    };
 }
