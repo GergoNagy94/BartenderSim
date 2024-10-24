@@ -10,8 +10,8 @@ public class Display {
     }
 
     public void showAllDrinks(ArrayList<Drink> drinks){
-        for (Object drink : drinks) {
-
+        for (var drink : drinks) {
+            print(drink.toString());
         }
     }
 }

@@ -20,6 +20,7 @@ public class Customer {
     public String getName() {
         return name;
     }
+
     public void setDrunkenness(int drunkenness) {
         if (drunkenness < 100 && drunkenness >= 0) {
             this.drunkenness = drunkenness;

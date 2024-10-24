@@ -11,9 +11,12 @@ public class Pub {
         this.customerList = customerList;
         this.drinkList = drinkList;
     }
+
     public ArrayList<Drink> getDrinkList() {
-        return drinkList;
+        return new ArrayList<>(drinkList);
     }
+
+    //consume drink
 
     public ArrayList<Customer> getCustomerList() {
         return customerList;
