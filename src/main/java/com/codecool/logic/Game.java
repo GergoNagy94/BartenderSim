@@ -48,7 +48,7 @@ public class Game {
 
                 customers.get(i).setDrunkenness(pub.getDrinkList().get(drinkSelected).getAlcPercentage());
                 display.print(String.valueOf(customers.get(i).getDrunkenness()));
-                //incerment alc
+                //incerment
 
                 display.print("Profit earned from this drink: " + pub.getDrinkList().get(drinkSelected).getPrice());
                 //display all profit
