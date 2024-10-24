@@ -1,7 +1,7 @@
 package com.codecool.data;
 
-public class Whisky extends Drink {
-    public Whisky(String name, int price, int alcPercentage, int amountLeft) {
+public class Gin extends Drink {
+    public Gin(String name, int price, int alcPercentage, int amountLeft) {
         super(name, price, alcPercentage, amountLeft);
     }
 }

@@ -1,4 +1,4 @@
-package com.codecool.data;
+package com.codecool.logic;
 
 import java.util.Random;
 

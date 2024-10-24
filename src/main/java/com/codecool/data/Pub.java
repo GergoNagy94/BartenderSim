@@ -5,12 +5,11 @@ import java.util.ArrayList;
 public class Pub {
     private ArrayList<Customer> customerList;
     private ArrayList<Drink> drinkList;
-    private double profit;
+    private double profit = 0.0;
 
-    public Pub(ArrayList<Customer> customerList, ArrayList<Drink> drinkList, double profit) {
+    public Pub(ArrayList<Customer> customerList, ArrayList<Drink> drinkList) {
         this.customerList = customerList;
         this.drinkList = drinkList;
-        this.profit = profit;
     }
     public ArrayList<Drink> getDrinkList() {
         return drinkList;
