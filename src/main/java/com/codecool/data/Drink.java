@@ -25,6 +25,20 @@ public class Drink {
         return price;
     }
 
+    public int getAlcPercentage() {
+        return alcPercentage;
+    }
+
+
+
+    public void consumeDrink() {
+        amountLeft -= 1;
+    }
+
+    public boolean checkAvailability() {
+        return amountLeft > 0;
+    }
+
     @Override
     public String toString() {
         return "Name: " + name +

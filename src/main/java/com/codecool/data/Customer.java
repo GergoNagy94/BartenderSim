@@ -21,9 +21,13 @@ public class Customer {
         return name;
     }
 
+    public int getDrunkenness() {
+        return drunkenness;
+    }
+
     public void setDrunkenness(int drunkenness) {
         if (drunkenness < 100 && drunkenness >= 0) {
-            this.drunkenness = drunkenness;
+            this.drunkenness += drunkenness;
         }
     }
 
@@ -35,5 +39,19 @@ public class Customer {
             case 3 -> states[3];
             default -> states[4];
         };
+    }
+
+    public String getStatus() {
+        String status = "";
+        if (drunkenness <= 69) {
+            status = "notyet";
+        } else if (drunkenness <= 89) {
+            status = "go";
+        } else if (drunkenness <= 99) {
+            status = "notyet";
+        } else if(drunkenness >= 100){
+            status = "lost";
+        }
+        return status;
     }
 }

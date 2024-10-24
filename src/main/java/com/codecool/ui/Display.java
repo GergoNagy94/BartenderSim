@@ -14,4 +14,14 @@ public class Display {
             print(drink.toString());
         }
     }
+
+    public void showValidDrinks(ArrayList<Drink> drinks){
+        for (int i = 0; i < drinks.size(); i++) {
+            print( i + 1 + ". - " + drinks.get(i).getName() + " - " + drinks.get(i).getPrice());
+        }
+    }
+
+    public void showLineBreak() {
+        print("--------------------------------------------------------------");
+    }
 }
