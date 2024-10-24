@@ -1,6 +1,8 @@
 package com.codecool.logic;
 
-import com.codecool.data.*;
+import com.codecool.data.Customer;
+import com.codecool.data.Drink;
+import com.codecool.data.Pub;
 import com.codecool.ui.Display;
 import com.codecool.ui.Input;
 
@@ -15,8 +17,9 @@ public class Game {
 
 
     public void runGame() {
-        display.print("Welcome to our game! \n You are a bartender serving slightly alcoholics. You have to ");
+        display.print("Welcome to our game! \nYou are a bartender serving slightly alcoholics.");
         display.print("You have " + pub.getCustomerList().size() + " customers waiting for you.");
+        display.showLineBreak();
         display.showAllDrinks(pub.getDrinkList());
 
         do {
@@ -24,39 +27,67 @@ public class Game {
             ArrayList<Customer> customers = pub.getCustomerList();
             RandomGenerator randomGenerator = new RandomGenerator();
             for (int i = 0; i < customers.size(); i++) {
-                display.showLineBreak();
-                display.print(customers.get(i).getName() + " asks for a " +  pub.getDrinkList().get(randomGenerator.generateRandomNumber(5)).getName());
-                int drinkSelected = 0;
-                boolean barHasDrink = false;
+                if(customers.get(i).isAvailable()) {
+                    display.showLineBreak();
+                    display.print(customers.get(i).getName() + " asks for a " + pub.getDrinkList().get(randomGenerator.generateRandomNumber(5)).getName() + "\n");
+                    int drinkSelected = 0;
+                    boolean barHasDrink = false;
 
-                while (!barHasDrink) {
-                    display.print("The options are: ");
-                    display.showValidDrinks(pub.getDrinkList());
-                    drinkSelected = input.getValidDrink(pub.getDrinkList().size());
+                    while (!barHasDrink && customers.get(i).isAvailable()) {
+                        display.print("The options are: ");
+                        display.showValidDrinks(pub.getDrinkList());
+                        drinkSelected = input.getValidDrink(pub.getDrinkList().size());
                         if (pub.getDrinkList().contains(pub.getDrinkList().get(drinkSelected))) {
+                            customers.get(i).setDrunkenness(pub.getDrinkList().get(drinkSelected).getAlcPercentage());
+                            display.print(String.valueOf(customers.get(i).getDrunkenness()));
                             barHasDrink = true;
                         }
-                }
+                    }
 
-                if (pub.getDrinkList().get(drinkSelected).checkAvailability()) {
-                    pub.getDrinkList().get(drinkSelected).consumeDrink();
+                    if (pub.getDrinkList().get(drinkSelected).checkAvailability()) {
+                        pub.getDrinkList().get(drinkSelected).consumeDrink();
+                        switch (customers.get(i).getStatus()) {
+                            case "notyet":
+                                break;
+                            case "go":
+                                customers.get(i).setAvailable(false);
+                                display.print(customers.get(i).getName() + " went home.");
+                                break;
+                            case "lost":
+                                display.print("You lost!");
+                                isGameOver = true;
+                                break;
+                        }
+
+                    } else {
+                        display.print("You failed to do your task and promised a drink to someone when there is no drink left. You lost");
+                        isGameOver = true;
+                        System.exit(0);
+                        //getprofit
+                    }
+
+                    //incerment
+
+                    display.print("Profit earned from this drink: " + pub.getDrinkList().get(drinkSelected).getPrice());
+                    //display all profit
                 } else {
-                    display.print("You failed to do your task and promised a drink to someone when there is no drink left. You lost");
-                    isGameOver = true;
-                    //getprofit
+                    int numberOfCustomers = customers.size();
+                    int counter = 0;
+                    for (Customer customer : customers) {
+                        if(!customer.isAvailable()) {
+                            counter++;
+                        }
+                    }
+                    if (counter == numberOfCustomers) {
+                        display.print("Great day! Everyone went home");
+                        isGameOver = true;
+                        System.exit(0);
+                    }
                 }
-
-                customers.get(i).setDrunkenness(pub.getDrinkList().get(drinkSelected).getAlcPercentage());
-                display.print(String.valueOf(customers.get(i).getDrunkenness()));
-                //incerment
-
-                display.print("Profit earned from this drink: " + pub.getDrinkList().get(drinkSelected).getPrice());
-                //display all profit
-
             }
             // bartender gives drink or not
             //display profit
-        } while(!isGameOver);
+        } while (!isGameOver);
     }
 
 

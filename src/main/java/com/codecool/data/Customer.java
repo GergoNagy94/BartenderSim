@@ -4,6 +4,7 @@ public class Customer {
     private int id;
     private final String name;
     private int drunkenness = 0;
+    private boolean available = true;
     private String[] states = {
             "Please give me something to drink Sir!",
             "It will be hmmm... your favorite!",
@@ -49,9 +50,17 @@ public class Customer {
             status = "go";
         } else if (drunkenness <= 99) {
             status = "notyet";
-        } else if(drunkenness >= 100){
+        } else {
             status = "lost";
         }
         return status;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }
